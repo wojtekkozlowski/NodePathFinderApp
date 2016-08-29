@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PsuhNot2/AppDelegate.swift"
-            timestampString = "494155334.702924"
+            timestampString = "494155680.343731"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "183"
-            endingLineNumber = "183"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "navigateTo(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -58,45 +58,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PsuhNot2/AppDelegate.swift"
-            timestampString = "494155334.702924"
+            timestampString = "494155668.000031"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "114"
+            endingLineNumber = "114"
             landmarkName = "navigateTo(_:)"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PsuhNot2.T1_R.navigateTo (Swift.Array&lt;PsuhNot2.Node.Type&gt;) -&gt; ()"
-                  moduleName = "PsuhNot2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/development/Desktop/PsuhNot2/PsuhNot2/AppDelegate.swift"
-                  timestampString = "494155454.713165"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "2082">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PsuhNot2.T1_R.navigateTo (Swift.Array&lt;PsuhNot2.Node.Type&gt;) -&gt; ()"
-                  moduleName = "PsuhNot2"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/development/Desktop/PsuhNot2/PsuhNot2/AppDelegate.swift"
-                  timestampString = "494155454.713373"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "122"
-                  endingLineNumber = "122"
-                  offsetFromSymbolStart = "2148">
-               </Location>
-            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PsuhNot2/AppDelegate.swift"
+            timestampString = "494155675.982667"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "navigateTo(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PsuhNot2/AppDelegate.swift"
+            timestampString = "494155684.87858"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "navigateTo(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PsuhNot2/AppDelegate.swift"
+            timestampString = "494155687.143157"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "navigateTo(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PsuhNot2/AppDelegate.swift"
+            timestampString = "494155694.374723"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "313"
+            endingLineNumber = "313"
+            landmarkName = "navigateTo(_:)"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
