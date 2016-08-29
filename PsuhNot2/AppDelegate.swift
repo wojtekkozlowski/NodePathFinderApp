@@ -34,15 +34,14 @@ class TabBar: UITabBarController, Node {
         let n1 = UINavigationController()
         let t1r = T1_R()
         n1.viewControllers = [t1r]
-        n1.title = "t1_r"
         let n2 = UINavigationController()
+        n1.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.TopRated, tag: 0)
         let t2r = T2_R()
         n2.viewControllers = [t2r]
-        n2.title = "t2_r"
+        n2.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.Bookmarks, tag: 0)
         self.viewControllers = [n1, n2]
     
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(remoteNotification), name: "remoteNotification", object: nil)
-    
     }
     
     @objc func remoteNotification(notification: NSNotification) {
@@ -69,7 +68,6 @@ class TabBar: UITabBarController, Node {
                 }
                 self.selectedViewController = self.viewControllers![tabIndex]
                 nodePath = path.dropFirst().dropFirst().map { $0.node }
-                nodePath.forEach { print("\($0), ", terminator:"") }
                 if nodePath.count == 0 {
                     (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(true)
                 } else {
@@ -95,9 +93,7 @@ class TabBar: UITabBarController, Node {
             nodePath = path.map { $0.node }
         }
     
-//        nodePath.forEach { print("\($0), ", terminator:"") }
         (snc.visibleViewController! as? Node)?.navigateTo(nodePath)
-
     }
     
     func navigateTo(path: [Node.Type]) {
@@ -177,6 +173,7 @@ class T1_R_1_1: UIViewController, Node {
     }
 
     func navigateTo(path: [Node.Type]) {
+        
     }
 }
 
