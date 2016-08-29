@@ -70,7 +70,12 @@ class TabBar: UITabBarController, Node {
                 self.selectedViewController = self.viewControllers![tabIndex]
                 nodePath = path.dropFirst().dropFirst().map { $0.node }
                 nodePath.forEach { print("\($0), ", terminator:"") }
-                ((self.selectedViewController as! UINavigationController).viewControllers.last! as! Node).navigateTo(nodePath)
+                if nodePath.count == 0 {
+                    (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(true)
+                } else {
+                    ((self.selectedViewController as! UINavigationController).viewControllers.last! as! Node).navigateTo(nodePath)
+                }
+                
                 return
             } else {
                 let popTo = snc.viewControllers.filter { vc in
@@ -78,8 +83,13 @@ class TabBar: UITabBarController, Node {
                     let name = m.name
                     return name == first.node.name
                 }.first!
-                snc.popToViewController(popTo, animated: false)
                 nodePath = path.dropFirst().map { $0.node }
+                if nodePath.count == 0 {
+                    snc.popToViewController(popTo, animated: true)
+                } else {
+                    snc.popToViewController(popTo, animated: false)
+                }
+                
             }
         } else {
             nodePath = path.map { $0.node }
