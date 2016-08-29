@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tb = TabBar()
         window?.rootViewController = tb
         window?.makeKeyAndVisible()
-        
+        TabBar.printChildren()
         return true
     }
 }
@@ -34,9 +34,11 @@ class TabBar: UITabBarController, Node {
         let n1 = UINavigationController()
         let t1r = T1_R()
         n1.viewControllers = [t1r]
+        n1.title = "t1_r"
         let n2 = UINavigationController()
         let t2r = T2_R()
         n2.viewControllers = [t2r]
+        n2.title = "t2_r"
         self.viewControllers = [n1, n2]
     
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(remoteNotification), name: "remoteNotification", object: nil)
@@ -55,19 +57,35 @@ class TabBar: UITabBarController, Node {
         let nodePath: [Node.Type]
         
         if let first = path.first where first.action == .Up {
-            let popTo = snc.viewControllers.filter { vc in
-                let m = Mirror(reflecting: vc).subjectType as! Node.Type
-                let name = m.name
-                return name == first.node.name
-            }.first!
-            nodePath = path.dropFirst().map { $0.node }
-            snc.popToViewController(popTo, animated: false)
+            
+            if first.node == TabBar.self {
+                let second = path[1].node
+                let classes = self.viewControllers!.flatMap { (Mirror(reflecting:(($0 as! UINavigationController).viewControllers.first!)).subjectType as! Node.Type) }
+                var tabIndex = 0
+                for (i, e) in classes.enumerate() {
+                    if e == second {
+                        tabIndex = i
+                    }
+                }
+                self.selectedViewController = self.viewControllers![tabIndex]
+                nodePath = path.dropFirst().dropFirst().map { $0.node }
+                nodePath.forEach { print("\($0), ", terminator:"") }
+                ((self.selectedViewController as! UINavigationController).viewControllers.last! as! Node).navigateTo(nodePath)
+                return
+            } else {
+                let popTo = snc.viewControllers.filter { vc in
+                    let m = Mirror(reflecting: vc).subjectType as! Node.Type
+                    let name = m.name
+                    return name == first.node.name
+                }.first!
+                snc.popToViewController(popTo, animated: false)
+                nodePath = path.dropFirst().map { $0.node }
+            }
         } else {
             nodePath = path.map { $0.node }
         }
     
-        nodePath.forEach { print("\($0), ", terminator:"") }
-        
+//        nodePath.forEach { print("\($0), ", terminator:"") }
         (snc.visibleViewController! as? Node)?.navigateTo(nodePath)
 
     }
@@ -237,8 +255,19 @@ class T2_R_1: UIViewController, Node  {
     }
     
     func navigateTo(path: [Node.Type]) {
-        
+        if let next = path.first where next.name != self.name() {
+            let remainingPath = Array(path.dropFirst())
+            switch next.name {
+            case "t2_r_1_1":
+                let vc = T2_R_1_1()
+                self.navigationController?.pushViewController(vc, animated: false)
+                vc.navigateTo(remainingPath)
+                
+            default: break;
+            }
+        }
     }
+
     
 }
 
@@ -273,7 +302,16 @@ class T2_R_2: UIViewController, Node  {
     }
     
     func navigateTo(path: [Node.Type]) {
-        
+        if let next = path.first where next.name != self.name() {
+            let remainingPath = Array(path.dropFirst())
+            switch next.name {
+            case "t2_r_2_1":
+                let vc = T2_R_2_1()
+                self.navigationController?.pushViewController(vc, animated: false)
+                vc.navigateTo(remainingPath)
+            default: break;
+            }
+        }
     }
     
 }
