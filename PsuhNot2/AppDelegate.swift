@@ -67,7 +67,9 @@ class TabBar: UITabBarController, Node {
                     }
                 }
                 self.selectedViewController = self.viewControllers![tabIndex]
+                // calucalte the path again now that we are on apropriate tab
                 nodePath = path.dropFirst().dropFirst().map { $0.node }
+                nodePath.forEach { print($0) }
                 if nodePath.count == 0 {
                     (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(true)
                 } else {
@@ -266,6 +268,7 @@ class T2_R_1: UIViewController, Node  {
     }
     
     func navigateTo(path: [Node.Type]) {
+        path.forEach { print($0) }
         if let next = path.first where next.name != self.name() {
             let remainingPath = Array(path.dropFirst())
             let animated = remainingPath.count == 0
