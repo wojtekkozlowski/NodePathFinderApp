@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3326CC151D73AF0800B3E496"
-               BuildableName = "PsuhNot2.app"
-               BlueprintName = "PsuhNot2"
-               ReferencedContainer = "container:PsuhNot2.xcodeproj">
+               BuildableName = "PushNot2.app"
+               BlueprintName = "PushNot2"
+               ReferencedContainer = "container:PushNot2.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,19 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "3326CC291D73AF0800B3E496"
-               BuildableName = "PsuhNot2Tests.xctest"
-               BlueprintName = "PsuhNot2Tests"
-               ReferencedContainer = "container:PsuhNot2.xcodeproj">
+               BuildableName = "PushNot2.xctest"
+               BlueprintName = "PushNot2Tests"
+               ReferencedContainer = "container:PushNot2.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "335F50B41D74FCD200C4B8A6"
+               BuildableName = "PushNot2UITests.xctest"
+               BlueprintName = "PushNot2UITests"
+               ReferencedContainer = "container:PushNot2.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +53,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3326CC151D73AF0800B3E496"
-            BuildableName = "PsuhNot2.app"
-            BlueprintName = "PsuhNot2"
-            ReferencedContainer = "container:PsuhNot2.xcodeproj">
+            BuildableName = "PushNot2.app"
+            BlueprintName = "PushNot2"
+            ReferencedContainer = "container:PushNot2.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3326CC151D73AF0800B3E496"
-            BuildableName = "PsuhNot2.app"
-            BlueprintName = "PsuhNot2"
-            ReferencedContainer = "container:PsuhNot2.xcodeproj">
+            BuildableName = "PushNot2.app"
+            BlueprintName = "PushNot2"
+            ReferencedContainer = "container:PushNot2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +95,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "3326CC151D73AF0800B3E496"
-            BuildableName = "PsuhNot2.app"
-            BlueprintName = "PsuhNot2"
-            ReferencedContainer = "container:PsuhNot2.xcodeproj">
+            BuildableName = "PushNot2.app"
+            BlueprintName = "PushNot2"
+            ReferencedContainer = "container:PushNot2.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

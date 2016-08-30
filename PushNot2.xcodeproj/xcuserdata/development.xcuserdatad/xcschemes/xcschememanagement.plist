@@ -9,6 +9,11 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>PushNot2UITests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -18,6 +23,16 @@
 			<true/>
 		</dict>
 		<key>3326CC291D73AF0800B3E496</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>335F50A61D74F9F800C4B8A6</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>335F50B41D74FCD200C4B8A6</key>
 		<dict>
 			<key>primary</key>
 			<true/>

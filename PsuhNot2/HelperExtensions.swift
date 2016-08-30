@@ -40,7 +40,7 @@ public extension UINavigationController {
 extension UIViewController {
     func addNavRequest(){
         let t = UITextField()
-        t.text = "t1_r_1_1"
+        t.accessibilityLabel = "navTextField"
         let b = self.centralButton(title: "Go")
         
         b.action { _ in

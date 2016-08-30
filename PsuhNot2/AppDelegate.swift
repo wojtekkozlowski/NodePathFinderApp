@@ -67,13 +67,28 @@ class TabBar: UITabBarController, Node {
                     }
                 }
                 self.selectedViewController = self.viewControllers![tabIndex]
-                // calucalte the path again now that we are on apropriate tab
-                nodePath = path.dropFirst().dropFirst().map { $0.node }
-                nodePath.forEach { print($0) }
-                if nodePath.count == 0 {
-                    (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(true)
+                let snvc = (self.selectedViewController as! UINavigationController)
+                
+                let visibleNode = Mirror(reflecting:snvc.viewControllers.last!).subjectType as! Node.Type
+                print("visible node: \(visibleNode)")
+                let newPath = pathBetweenNodes(destination: target, from: visibleNode, rootNode: TabBar.self)
+                
+                var newNodePath = newPath.map { $0.node }
+                newNodePath.forEach { print($0) }
+                
+                if let first = newPath.first where first.action == .Up {
+                    if newNodePath.count == 1 {
+                        (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(true)
+                    } else {
+                        (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(false)
+                    }
+                    newNodePath = Array(newNodePath.dropFirst())
+                }
+                
+                if newNodePath.count == 0 {
+//                    (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(true)
                 } else {
-                    ((self.selectedViewController as! UINavigationController).viewControllers.last! as! Node).navigateTo(nodePath)
+                    ((self.selectedViewController as! UINavigationController).viewControllers.last! as! Node).navigateTo(newNodePath)
                 }
                 
                 return
@@ -268,7 +283,6 @@ class T2_R_1: UIViewController, Node  {
     }
     
     func navigateTo(path: [Node.Type]) {
-        path.forEach { print($0) }
         if let next = path.first where next.name != self.name() {
             let remainingPath = Array(path.dropFirst())
             let animated = remainingPath.count == 0

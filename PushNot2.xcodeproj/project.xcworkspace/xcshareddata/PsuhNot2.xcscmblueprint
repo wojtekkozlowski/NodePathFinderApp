@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "EE35D0C0B770239458DA269B144A545ED3908C71",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "EE35D0C0B770239458DA269B144A545ED3908C71" : 0,
+    "7487E27C32605404BD1E831248275DEB70E002C8" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "388D1306-7F09-4DAF-89F0-0D67886E54EE",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "EE35D0C0B770239458DA269B144A545ED3908C71" : "PsuhNot2\/",
+    "7487E27C32605404BD1E831248275DEB70E002C8" : "..\/NodePathFinder"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "PsuhNot2",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "PsuhNot2.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wojtekkozlowski\/NodePathFinder.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "7487E27C32605404BD1E831248275DEB70E002C8"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/wojtekkozlowski\/NodePathFinderApp.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "EE35D0C0B770239458DA269B144A545ED3908C71"
+    }
+  ]
+}
