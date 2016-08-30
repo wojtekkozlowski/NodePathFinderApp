@@ -71,14 +71,23 @@ class PushNot2UITests: XCTestCase {
         navigateToAndAssert("t2_r")
     }
     
+    func testThree(){
+        navigateToAndAssert("t2_r_2")
+        navigateToAndAssert("t2_r_1")
+        navigateToAndAssert("t1_r_1_1")
+        navigateToAndAssert("t2_r_1")
+        navigateToAndAssert("t1_r_1")
+    }
+    
     func testRandom() {
         let possibleDestinations = ["t1_r", "t1_r_1", "t1_r_1_1","t1_r_2", "t1_r_2_1",  "t2_r", "t2_r_1", "t2_r_1_1","t2_r_2", "t2_r_2_1"]
         
-        let destinations: [String] = (0...50).map { _ in
+        let destinations: [String] = (0...6000).map { _ in
             let r = Int(arc4random_uniform(UInt32(possibleDestinations.count-1)))
             return possibleDestinations[r]
         }
-        for d in destinations {
+        for (i,d) in destinations.enumerate() {
+            print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>(\(i)) going to: \(d)")
             navigateToAndAssert(d)
         }
     }

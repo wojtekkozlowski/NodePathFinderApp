@@ -78,7 +78,14 @@ class TabBar: UITabBarController, Node {
                 
                 if let first = newPath.first where first.action == .Up {
                     if newNodePath.count == 1 {
-                        (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(true)
+                        
+                        let popTo = snvc.viewControllers.filter { vc in
+                            let m = Mirror(reflecting: vc).subjectType as! Node.Type
+                            let name = m.name
+                            return name == first.node.name
+                            }.first!
+                        
+                        (self.selectedViewController as! UINavigationController).popToViewController(popTo, animated: true)
                     } else {
                         (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(false)
                     }
