@@ -48,9 +48,24 @@ class TabBar: UITabBarController, Node {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(remoteNotification), name: "remoteNotification", object: nil)
     }
     
-    func tabIndexForNodeType(nodeType: Node.Type) -> Int {
-        
-        return 0
+    func tabIndexForNodeType(nodeType: Node.Type) -> Int? {
+        let classes = self.viewControllers!.flatMap { (Mirror(reflecting:(($0 as! UINavigationController).viewControllers.first!)).subjectType as! Node.Type) }
+        for (index, element) in classes.enumerate() {
+            if element == nodeType {
+                return index
+            }
+        }
+        return nil
+    }
+    
+    func selectTabForNodeType(nodeType:Node.Type){
+        let newTabIndex = self.tabIndexForNodeType(nodeType)!
+        self.selectedViewController = self.viewControllers![newTabIndex]
+    }
+    
+    func pathToTargetFromVisibleNode(target:String) -> [ActionItem] {
+        let visibleNode = self.selectedNavigationController.visibleNodeType
+        return pathBetweenNodes(destination: target, from: visibleNode, rootNode: TabBar.self)
     }
     
     @objc func remoteNotification(notification: NSNotification) {
@@ -61,49 +76,38 @@ class TabBar: UITabBarController, Node {
         let nodePath: [Node.Type]
         
         if let first = path.first where first.action == .Up {
-            
             if first.node == TabBar.self {
-                let second = path[1].node
-                let classes = self.viewControllers!.flatMap { (Mirror(reflecting:(($0 as! UINavigationController).viewControllers.first!)).subjectType as! Node.Type) }
-                var tabIndex = 0
-                for (i, e) in classes.enumerate() {
-                    if e == second {
-                        tabIndex = i
-                    }
-                }
-                
-                self.selectedViewController = self.viewControllers![tabIndex]
-                let visibleNode = self.selectedNavigationController.visibleNodeType
-                let newPath = pathBetweenNodes(destination: target, from: visibleNode, rootNode: TabBar.self)
-                var newNodePath = newPath.map { $0.node }
-                
-                if let first = newPath.first where first.action == .Up {
-                    if newNodePath.count == 1 {
-                        let popTo = self.selectedNavigationController.viewControllerForNodeName(first.node.name)!
-                        self.selectedNavigationController.popToViewController(popTo, animated: true)
-                    } else {
-                        self.selectedNavigationController.popToRootViewControllerAnimated(false)
-                    }
-                    newNodePath = Array(newNodePath.dropFirst())
-                }
-                
-                if newNodePath.count > 0 {
-                    self.selectedNavigationController.visibleNode.navigateTo(newNodePath)
-                }
-                
+                self.navToDifferentTab(target, path: path)
                 return
             } else {
                 let popTo = self.selectedNavigationController.viewControllerForNodeName(first.node.name)!
                 nodePath = path.dropFirst().map { $0.node }
                 let animated = nodePath.count == 0
                 self.selectedNavigationController.popToViewController(popTo, animated: animated)
-                
             }
         } else {
             nodePath = path.map { $0.node }
         }
     
         self.selectedNavigationController.visibleNode.navigateTo(nodePath)
+    }
+    
+    func navToDifferentTab(target: String, path:[ActionItem]) {
+        self.selectTabForNodeType(path[1].node)
+        var newPath = pathToTargetFromVisibleNode(target)
+        if let first = newPath.first where first.action == .Up {
+            if newPath.count == 1 {
+                let popTo = self.selectedNavigationController.viewControllerForNodeName(first.node.name)!
+                self.selectedNavigationController.popToViewController(popTo, animated: true)
+            } else {
+                self.selectedNavigationController.popToRootViewControllerAnimated(false)
+            }
+            newPath = Array(newPath.dropFirst())
+        }
+        if newPath.count > 0 {
+            let nodePath = newPath.map { $0.node }
+            self.selectedNavigationController.visibleNode.navigateTo(nodePath)
+        }
     }
     
     func navigateTo(path: [Node.Type]) {
