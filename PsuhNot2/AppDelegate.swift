@@ -25,15 +25,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
-class TabBar: UITabBarController, Node {
+class TabBar: UITabBarController, TabBarNavigable {
     
     static let name = "t"
     static let children: [Node.Type] = [T1_R.self, T2_R.self]
     
-    var selectedNavigationController: UINavigationController {
-        return (self.selectedViewController as! UINavigationController)
-    }
- 
     override func viewDidLoad() {
         let n1 = UINavigationController()
         n1.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.TopRated, tag: 0)
@@ -46,67 +42,13 @@ class TabBar: UITabBarController, Node {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(remoteNotification), name: "remoteNotification", object: nil)
     }
     
-    func tabIndexForNodeType(nodeType: Node.Type) -> Int? {
-        let classes = self.viewControllers!.flatMap { (Mirror(reflecting:(($0 as! UINavigationController).viewControllers.first!)).subjectType as! Node.Type) }
-        for (index, element) in classes.enumerate() {
-            if element == nodeType {
-                return index
-            }
-        }
-        return nil
-    }
-    
-    func selectTabForNodeType(nodeType:Node.Type){
-        let newTabIndex = self.tabIndexForNodeType(nodeType)!
-        self.selectedViewController = self.viewControllers![newTabIndex]
-    }
-    
-    func pathToTargetFromVisibleNode(target:String) -> [ActionItem] {
-        let visibleNode = self.selectedNavigationController.visibleNodeType
-        return pathBetweenNodes(destination: target, from: visibleNode, rootNode: TabBar.self)
-    }
-    
     @objc func remoteNotification(notification: NSNotification) {
         let target = notification.userInfo!["target"]! as! String
-       
-        let visibleNodeType = self.selectedNavigationController.visibleNodeType
-        let path = pathBetweenNodes(destination: target, from: visibleNodeType, rootNode: TabBar.self)
-        
-        if let first = path.first where first.action == .Up && first.node == TabBar.self {
-            self.navToDifferentTab(target, path: path)
-        } else {
-            let nodePath: [Node.Type]
-            if let first = path.first where first.action == .Up {
-                let popTo = self.selectedNavigationController.viewControllerForNodeName(first.node.name)!
-                nodePath = path.dropFirst().map { $0.node }
-                self.selectedNavigationController.popToViewController(popTo, animated: nodePath.count == 0)
-            } else {
-                nodePath = path.map { $0.node }
-            }
-            self.selectedNavigationController.visibleNode.navigateTo(nodePath)
-        }
-    }
-    
-    func navToDifferentTab(target: String, path:[ActionItem]) {
-        self.selectTabForNodeType(path[1].node)
-        var newPath = pathToTargetFromVisibleNode(target)
-        if let first = newPath.first where first.action == .Up {
-            if newPath.count == 1 {
-                let popTo = self.selectedNavigationController.viewControllerForNodeName(first.node.name)!
-                self.selectedNavigationController.popToViewController(popTo, animated: true)
-            } else {
-                self.selectedNavigationController.popToRootViewControllerAnimated(false)
-            }
-            newPath = Array(newPath.dropFirst())
-        }
-        if newPath.count > 0 {
-            let nodePath = newPath.map { $0.node }
-            self.selectedNavigationController.visibleNode.navigateTo(nodePath)
-        }
+        self.navigateToTarget(target)
     }
     
     func navigateTo(path: [Node.Type]) {
-        
+        fatalError()
     }
 }
 
@@ -128,7 +70,6 @@ extension UINavigationController {
             return false
         }.first
     }
-
 }
 
 class T1_R: UIViewController, Node {
