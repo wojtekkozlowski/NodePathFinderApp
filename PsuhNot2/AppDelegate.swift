@@ -253,7 +253,7 @@ class T2_R_1: UIViewController, Node  {
     
 }
 
-class T2_R_1_1: UIViewController , Node  {
+class T2_R_1_1: UIViewController, Node  {
     
     static let name = "t2_r_1_1"
     static let children: [Node.Type] = []

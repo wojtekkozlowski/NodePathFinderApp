@@ -11,11 +11,10 @@
 		3326CC211D73AF0800B3E496 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3326CC201D73AF0800B3E496 /* Assets.xcassets */; };
 		3326CC241D73AF0800B3E496 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3326CC221D73AF0800B3E496 /* LaunchScreen.storyboard */; };
 		3326CC2F1D73AF0800B3E496 /* PushNot2Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326CC2E1D73AF0800B3E496 /* PushNot2Tests.swift */; };
-		3326CC3E1D73EAC200B3E496 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326CC3D1D73EAC200B3E496 /* UIButtonExtension.swift */; };
 		3326CC401D73FA3A00B3E496 /* HelperExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326CC3F1D73FA3A00B3E496 /* HelperExtensions.swift */; };
-		3326CC4C1D7422F700B3E496 /* NodePathFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326CC4A1D7422F700B3E496 /* NodePathFinder.swift */; };
-		3326CC4D1D7422F700B3E496 /* NodeDebugExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3326CC4B1D7422F700B3E496 /* NodeDebugExtension.swift */; };
 		335031CB1D76B4D700B183C6 /* TabBarNavigable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335031CA1D76B4D700B183C6 /* TabBarNavigable.swift */; };
+		335031CE1D76B82400B183C6 /* NodeDebugExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335031CC1D76B82400B183C6 /* NodeDebugExtension.swift */; };
+		335031CF1D76B82400B183C6 /* NodePathFinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335031CD1D76B82400B183C6 /* NodePathFinder.swift */; };
 		335F50B81D74FCD200C4B8A6 /* PushNot2UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F50B71D74FCD200C4B8A6 /* PushNot2UITests.swift */; };
 /* End PBXBuildFile section */
 
@@ -45,11 +44,10 @@
 		3326CC2A1D73AF0800B3E496 /* PushNot2.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushNot2.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3326CC2E1D73AF0800B3E496 /* PushNot2Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNot2Tests.swift; sourceTree = "<group>"; };
 		3326CC301D73AF0800B3E496 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3326CC3D1D73EAC200B3E496 /* UIButtonExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		3326CC3F1D73FA3A00B3E496 /* HelperExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HelperExtensions.swift; sourceTree = "<group>"; };
-		3326CC4A1D7422F700B3E496 /* NodePathFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NodePathFinder.swift; path = ../../../NodePathFinder/Path2/NodePathFinder.swift; sourceTree = "<group>"; };
-		3326CC4B1D7422F700B3E496 /* NodeDebugExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NodeDebugExtension.swift; path = ../../../NodePathFinder/Path2/NodeDebugExtension.swift; sourceTree = "<group>"; };
 		335031CA1D76B4D700B183C6 /* TabBarNavigable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarNavigable.swift; sourceTree = "<group>"; };
+		335031CC1D76B82400B183C6 /* NodeDebugExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodeDebugExtension.swift; sourceTree = "<group>"; };
+		335031CD1D76B82400B183C6 /* NodePathFinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NodePathFinder.swift; sourceTree = "<group>"; };
 		335F50B51D74FCD200C4B8A6 /* PushNot2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PushNot2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		335F50B71D74FCD200C4B8A6 /* PushNot2UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushNot2UITests.swift; sourceTree = "<group>"; };
 		335F50B91D74FCD200C4B8A6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -103,12 +101,11 @@
 		3326CC181D73AF0800B3E496 /* PushNot2 */ = {
 			isa = PBXGroup;
 			children = (
-				3326CC4A1D7422F700B3E496 /* NodePathFinder.swift */,
-				3326CC4B1D7422F700B3E496 /* NodeDebugExtension.swift */,
+				335031CC1D76B82400B183C6 /* NodeDebugExtension.swift */,
+				335031CD1D76B82400B183C6 /* NodePathFinder.swift */,
 				3326CC191D73AF0800B3E496 /* AppDelegate.swift */,
 				335031CA1D76B4D700B183C6 /* TabBarNavigable.swift */,
 				3326CC3F1D73FA3A00B3E496 /* HelperExtensions.swift */,
-				3326CC3D1D73EAC200B3E496 /* UIButtonExtension.swift */,
 				3326CC201D73AF0800B3E496 /* Assets.xcassets */,
 				3326CC221D73AF0800B3E496 /* LaunchScreen.storyboard */,
 				3326CC251D73AF0800B3E496 /* Info.plist */,
@@ -266,10 +263,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3326CC3E1D73EAC200B3E496 /* UIButtonExtension.swift in Sources */,
 				3326CC401D73FA3A00B3E496 /* HelperExtensions.swift in Sources */,
-				3326CC4D1D7422F700B3E496 /* NodeDebugExtension.swift in Sources */,
-				3326CC4C1D7422F700B3E496 /* NodePathFinder.swift in Sources */,
+				335031CE1D76B82400B183C6 /* NodeDebugExtension.swift in Sources */,
+				335031CF1D76B82400B183C6 /* NodePathFinder.swift in Sources */,
 				3326CC1A1D73AF0800B3E496 /* AppDelegate.swift in Sources */,
 				335031CB1D76B4D700B183C6 /* TabBarNavigable.swift in Sources */,
 			);
