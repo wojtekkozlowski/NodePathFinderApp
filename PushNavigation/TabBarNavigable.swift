@@ -27,35 +27,15 @@ extension TabBarNavigable {
             let nodePath: [Node.Type]
             if let first = path.first where first.action == .Up {
                 let popTo = self.selectedNavigationController.viewControllerForNodeName(first.node.name)!
-                nodePath = path.dropFirst().map { $0.node }
+                nodePath = path.map { $0.node }
                 self.selectedNavigationController.popToViewController(popTo, animated: nodePath.count == 0)
             } else {
-                nodePath = path.dropFirst().map { $0.node }
+                nodePath = path.map { $0.node }
             }
             self.selectedNavigationController.visibleNode.navigateTo(nodePath)
         }
     }
     
-    private func selectTabForNodeType(nodeType:Node.Type) {
-        let newTabIndex = self.tabIndexForNodeType(nodeType)!
-        self.selectedViewController = self.viewControllers![newTabIndex]
-    }
-    private func pathToTargetFromVisibleNode(target:String) -> [ActionItem] {
-        let visibleNode = self.selectedNavigationController.visibleNodeType
-        return pathBetweenNodes(destination: target, from: visibleNode, rootNode: TabBar.self)
-    }
-    private var selectedNavigationController: UINavigationController {
-        return (self.selectedViewController as! UINavigationController)
-    }
-    private  func tabIndexForNodeType(nodeType: Node.Type) -> Int? {
-        let classes = self.viewControllers!.flatMap { (Mirror(reflecting:(($0 as! UINavigationController).viewControllers.first!)).subjectType as! Node.Type) }
-        for (index, element) in classes.enumerate() {
-            if element == nodeType {
-                return index
-            }
-        }
-        return nil
-    }
     private func navToDifferentTab(target: String, path:[ActionItem]) {
         self.selectTabForNodeType(path[1].node)
         var newPath = pathToTargetFromVisibleNode(target)
@@ -73,6 +53,31 @@ extension TabBarNavigable {
             self.selectedNavigationController.visibleNode.navigateTo(nodePath)
         }
     }
+    
+    private func selectTabForNodeType(nodeType:Node.Type) {
+        let newTabIndex = self.tabIndexForNodeType(nodeType)!
+        self.selectedViewController = self.viewControllers![newTabIndex]
+    }
+    
+    private func pathToTargetFromVisibleNode(target:String) -> [ActionItem] {
+        let visibleNode = self.selectedNavigationController.visibleNodeType
+        return pathBetweenNodes(destination: target, from: visibleNode, rootNode: TabBar.self)
+    }
+    
+    private var selectedNavigationController: UINavigationController {
+        return (self.selectedViewController as! UINavigationController)
+    }
+    
+    private  func tabIndexForNodeType(nodeType: Node.Type) -> Int? {
+        let classes = self.viewControllers!.flatMap { (Mirror(reflecting:(($0 as! UINavigationController).viewControllers.first!)).subjectType as! Node.Type) }
+        for (index, element) in classes.enumerate() {
+            if element == nodeType {
+                return index
+            }
+        }
+        return nil
+    }
+    
 }
 
 extension UINavigationController {
