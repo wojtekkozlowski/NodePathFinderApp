@@ -29,6 +29,10 @@ class TabBar: UITabBarController, Node {
     
     static let name = "t"
     static let children: [Node.Type] = [T1_R.self, T2_R.self]
+    
+    var selectedNavigationController: UINavigationController {
+        return (self.selectedViewController as! UINavigationController)
+    }
  
     override func viewDidLoad() {
         let n1 = UINavigationController()
@@ -44,15 +48,16 @@ class TabBar: UITabBarController, Node {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(remoteNotification), name: "remoteNotification", object: nil)
     }
     
+    func tabIndexForNodeType(nodeType: Node.Type) -> Int {
+        
+        return 0
+    }
+    
     @objc func remoteNotification(notification: NSNotification) {
         let target = notification.userInfo!["target"]! as! String
-        let snc = (self.selectedViewController as! UINavigationController)
-        let vvc = snc.visibleViewController!
-        let m = Mirror(reflecting: vvc)
-        let current = (m.subjectType as? Node.Type)!
-        
-        let path = pathBetweenNodes(destination: target, from: current, rootNode: TabBar.self)
-        
+       
+        let visibleNodeType = self.selectedNavigationController.visibleNodeType
+        let path = pathBetweenNodes(destination: target, from: visibleNodeType, rootNode: TabBar.self)
         let nodePath: [Node.Type]
         
         if let first = path.first where first.action == .Up {
@@ -66,64 +71,65 @@ class TabBar: UITabBarController, Node {
                         tabIndex = i
                     }
                 }
+                
                 self.selectedViewController = self.viewControllers![tabIndex]
-                let snvc = (self.selectedViewController as! UINavigationController)
-                
-                let visibleNode = Mirror(reflecting:snvc.viewControllers.last!).subjectType as! Node.Type
-                print("visible node: \(visibleNode)")
+                let visibleNode = self.selectedNavigationController.visibleNodeType
                 let newPath = pathBetweenNodes(destination: target, from: visibleNode, rootNode: TabBar.self)
-                
                 var newNodePath = newPath.map { $0.node }
-                newNodePath.forEach { print($0) }
                 
                 if let first = newPath.first where first.action == .Up {
                     if newNodePath.count == 1 {
-                        
-                        let popTo = snvc.viewControllers.filter { vc in
-                            let m = Mirror(reflecting: vc).subjectType as! Node.Type
-                            let name = m.name
-                            return name == first.node.name
-                            }.first!
-                        
-                        (self.selectedViewController as! UINavigationController).popToViewController(popTo, animated: true)
+                        let popTo = self.selectedNavigationController.viewControllerForNodeName(first.node.name)!
+                        self.selectedNavigationController.popToViewController(popTo, animated: true)
                     } else {
-                        (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(false)
+                        self.selectedNavigationController.popToRootViewControllerAnimated(false)
                     }
                     newNodePath = Array(newNodePath.dropFirst())
                 }
                 
-                if newNodePath.count == 0 {
-//                    (self.selectedViewController as! UINavigationController).popToRootViewControllerAnimated(true)
-                } else {
-                    ((self.selectedViewController as! UINavigationController).viewControllers.last! as! Node).navigateTo(newNodePath)
+                if newNodePath.count > 0 {
+                    self.selectedNavigationController.visibleNode.navigateTo(newNodePath)
                 }
                 
                 return
             } else {
-                let popTo = snc.viewControllers.filter { vc in
-                    let m = Mirror(reflecting: vc).subjectType as! Node.Type
-                    let name = m.name
-                    return name == first.node.name
-                }.first!
+                let popTo = self.selectedNavigationController.viewControllerForNodeName(first.node.name)!
                 nodePath = path.dropFirst().map { $0.node }
-                if nodePath.count == 0 {
-                    snc.popToViewController(popTo, animated: true)
-                } else {
-                    snc.popToViewController(popTo, animated: false)
-                }
+                let animated = nodePath.count == 0
+                self.selectedNavigationController.popToViewController(popTo, animated: animated)
                 
             }
         } else {
             nodePath = path.map { $0.node }
         }
     
-        (snc.visibleViewController! as? Node)?.navigateTo(nodePath)
+        self.selectedNavigationController.visibleNode.navigateTo(nodePath)
     }
     
     func navigateTo(path: [Node.Type]) {
         
     }
+}
+
+extension UINavigationController {
     
+    var visibleNode: Node {
+        return (self.visibleViewController! as! Node)
+    }
+    
+    var visibleNodeType: Node.Type {
+        return Mirror(reflecting:self.viewControllers.last!).subjectType as! Node.Type
+    }
+    
+    func viewControllerForNodeName(nodeName: String) -> UIViewController? {
+        return self.viewControllers.filter { vc in
+            if let m = Mirror(reflecting: vc).subjectType as? Node.Type {
+                return m.name == nodeName
+            }
+            return false
+        }.first
+    }
+
 }
 
 class T1_R: UIViewController, Node {

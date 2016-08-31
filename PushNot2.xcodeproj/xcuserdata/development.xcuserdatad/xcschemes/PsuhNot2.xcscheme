@@ -32,21 +32,16 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3326CC291D73AF0800B3E496"
-               BuildableName = "PushNot2.xctest"
-               BlueprintName = "PushNot2Tests"
-               ReferencedContainer = "container:PushNot2.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
                BlueprintIdentifier = "335F50B41D74FCD200C4B8A6"
                BuildableName = "PushNot2UITests.xctest"
                BlueprintName = "PushNot2UITests"
                ReferencedContainer = "container:PushNot2.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "PushNot2UITests/testRandom()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
       </Testables>
       <MacroExpansion>
