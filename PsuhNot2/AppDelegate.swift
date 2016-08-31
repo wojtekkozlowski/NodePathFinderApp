@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let tb = TabBar()
-        window?.rootViewController = tb
+        let tabBar = TabBar()
+        window?.rootViewController = tabBar
         window?.makeKeyAndVisible()
         TabBar.printChildren()
         return true
@@ -36,15 +36,13 @@ class TabBar: UITabBarController, Node {
  
     override func viewDidLoad() {
         let n1 = UINavigationController()
-        let t1r = T1_R()
-        n1.viewControllers = [t1r]
-        let n2 = UINavigationController()
         n1.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.TopRated, tag: 0)
-        let t2r = T2_R()
-        n2.viewControllers = [t2r]
+        n1.viewControllers = [T1_R()]
+        
+        let n2 = UINavigationController()
+        n2.viewControllers = [T2_R()]
         n2.tabBarItem = UITabBarItem(tabBarSystemItem: UITabBarSystemItem.Bookmarks, tag: 0)
         self.viewControllers = [n1, n2]
-    
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(remoteNotification), name: "remoteNotification", object: nil)
     }
     
@@ -73,23 +71,20 @@ class TabBar: UITabBarController, Node {
        
         let visibleNodeType = self.selectedNavigationController.visibleNodeType
         let path = pathBetweenNodes(destination: target, from: visibleNodeType, rootNode: TabBar.self)
-        let nodePath: [Node.Type]
         
-        if let first = path.first where first.action == .Up {
-            if first.node == TabBar.self {
-                self.navToDifferentTab(target, path: path)
-                return
-            } else {
+        if let first = path.first where first.action == .Up && first.node == TabBar.self {
+            self.navToDifferentTab(target, path: path)
+        } else {
+            let nodePath: [Node.Type]
+            if let first = path.first where first.action == .Up {
                 let popTo = self.selectedNavigationController.viewControllerForNodeName(first.node.name)!
                 nodePath = path.dropFirst().map { $0.node }
-                let animated = nodePath.count == 0
-                self.selectedNavigationController.popToViewController(popTo, animated: animated)
+                self.selectedNavigationController.popToViewController(popTo, animated: nodePath.count == 0)
+            } else {
+                nodePath = path.map { $0.node }
             }
-        } else {
-            nodePath = path.map { $0.node }
+            self.selectedNavigationController.visibleNode.navigateTo(nodePath)
         }
-    
-        self.selectedNavigationController.visibleNode.navigateTo(nodePath)
     }
     
     func navToDifferentTab(target: String, path:[ActionItem]) {
