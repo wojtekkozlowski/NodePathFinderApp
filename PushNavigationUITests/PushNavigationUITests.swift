@@ -28,7 +28,7 @@ extension XCUIElement {
 }
 
 
-class PushNot2UITests: XCTestCase {
+class PushNavigationUITests: XCTestCase {
     
     private var navTextField: XCUIElement!
     private var goButton: XCUIElement!
@@ -70,7 +70,7 @@ class PushNot2UITests: XCTestCase {
     }
     
     func testThree(){
-        navigateToAndAssert("t2_r_2")
+        navigateToAndAssert("t2_r_1")
         navigateToAndAssert("t2_r_1")
         navigateToAndAssert("t1_r_1_1")
         navigateToAndAssert("t2_r_1")

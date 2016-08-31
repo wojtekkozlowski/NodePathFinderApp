@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3326CC151D73AF0800B3E496"
-               BuildableName = "PushNot2.app"
-               BlueprintName = "PushNot2"
-               ReferencedContainer = "container:PushNot2.xcodeproj">
+               BlueprintIdentifier = "33D301081D76C0ED00DCCDBD"
+               BuildableName = "PushNavigation.app"
+               BlueprintName = "PushNavigation"
+               ReferencedContainer = "container:PushNavigation.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,25 +32,30 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "335F50B41D74FCD200C4B8A6"
-               BuildableName = "PushNot2UITests.xctest"
-               BlueprintName = "PushNot2UITests"
-               ReferencedContainer = "container:PushNot2.xcodeproj">
+               BlueprintIdentifier = "33D3011C1D76C0ED00DCCDBD"
+               BuildableName = "PushNavigationTests.xctest"
+               BlueprintName = "PushNavigationTests"
+               ReferencedContainer = "container:PushNavigation.xcodeproj">
             </BuildableReference>
-            <SkippedTests>
-               <Test
-                  Identifier = "PushNot2UITests/testRandom()">
-               </Test>
-            </SkippedTests>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "33D301271D76C0ED00DCCDBD"
+               BuildableName = "PushNavigationUITests.xctest"
+               BlueprintName = "PushNavigationUITests"
+               ReferencedContainer = "container:PushNavigation.xcodeproj">
+            </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3326CC151D73AF0800B3E496"
-            BuildableName = "PushNot2.app"
-            BlueprintName = "PushNot2"
-            ReferencedContainer = "container:PushNot2.xcodeproj">
+            BlueprintIdentifier = "33D301081D76C0ED00DCCDBD"
+            BuildableName = "PushNavigation.app"
+            BlueprintName = "PushNavigation"
+            ReferencedContainer = "container:PushNavigation.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -70,10 +75,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3326CC151D73AF0800B3E496"
-            BuildableName = "PushNot2.app"
-            BlueprintName = "PushNot2"
-            ReferencedContainer = "container:PushNot2.xcodeproj">
+            BlueprintIdentifier = "33D301081D76C0ED00DCCDBD"
+            BuildableName = "PushNavigation.app"
+            BlueprintName = "PushNavigation"
+            ReferencedContainer = "container:PushNavigation.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -89,10 +94,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3326CC151D73AF0800B3E496"
-            BuildableName = "PushNot2.app"
-            BlueprintName = "PushNot2"
-            ReferencedContainer = "container:PushNot2.xcodeproj">
+            BlueprintIdentifier = "33D301081D76C0ED00DCCDBD"
+            BuildableName = "PushNavigation.app"
+            BlueprintName = "PushNavigation"
+            ReferencedContainer = "container:PushNavigation.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

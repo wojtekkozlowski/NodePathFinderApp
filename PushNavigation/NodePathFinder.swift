@@ -35,13 +35,17 @@ struct ActionItem {
 }
 
 
-func pathToNodeFromRoot(destination destination:String, from currentNode: Node.Type) -> [Node.Type] {
+func pathToNode(destination destination:String, from currentNode: Node.Type) -> [Node.Type] {
+    print("from: \(currentNode)")
     if currentNode.name == destination {
+        print(currentNode)
         return [currentNode]
     } else {
         for child in currentNode.children {
-            let nodesFound = pathToNodeFromRoot(destination: destination, from: child)
+            let nodesFound = pathToNode(destination: destination, from: child)
+            print(nodesFound.count)
             if nodesFound.count > 0 {
+                print(currentNode)
                 return [currentNode] + nodesFound
             }
         }
@@ -53,11 +57,11 @@ func pathBetweenNodes(destination destination:String, from currentNode: Node.Typ
     if currentNode.name == destination {
         return []
     } else {
-        let pathToA = pathToNodeFromRoot(destination: destination, from: currentNode).dropFirst()
+        let pathToA = pathToNode(destination: destination, from: currentNode).dropFirst()
         if pathToA.count == 0 {
-            let pathToAFromRoot = pathToNodeFromRoot(destination: currentNode.name, from: rootNode)
-            let pathToBFromRoot = pathToNodeFromRoot(destination: destination, from: rootNode)
-            return buildPath(pathToAFromRoot, arrB: pathToBFromRoot)
+            let pathToDestinationFromRoot = pathToNode(destination: destination, from: rootNode)
+            let pathToCurrentFromRoot = pathToNode(destination: currentNode.name, from: rootNode)
+            return buildPath(pathToCurrentFromRoot, arrB: pathToDestinationFromRoot)
         } else {
             return pathToA.map { ActionItem(action: .Down, node: $0) }
         }

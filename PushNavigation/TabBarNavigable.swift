@@ -30,7 +30,7 @@ extension TabBarNavigable {
                 nodePath = path.dropFirst().map { $0.node }
                 self.selectedNavigationController.popToViewController(popTo, animated: nodePath.count == 0)
             } else {
-                nodePath = path.map { $0.node }
+                nodePath = path.dropFirst().map { $0.node }
             }
             self.selectedNavigationController.visibleNode.navigateTo(nodePath)
         }
@@ -73,7 +73,26 @@ extension TabBarNavigable {
             self.selectedNavigationController.visibleNode.navigateTo(nodePath)
         }
     }
-    
-    
 }
+
+extension UINavigationController {
+    
+    var visibleNode: Node {
+        return (self.visibleViewController! as! Node)
+    }
+    
+    var visibleNodeType: Node.Type {
+        return Mirror(reflecting:self.viewControllers.last!).subjectType as! Node.Type
+    }
+    
+    func viewControllerForNodeName(nodeName: String) -> UIViewController? {
+        return self.viewControllers.filter { vc in
+            if let m = Mirror(reflecting: vc).subjectType as? Node.Type {
+                return m.name == nodeName
+            }
+            return false
+            }.first
+    }
+}
+
 

@@ -1,33 +1,16 @@
 //
-//  AppDelegate.swift
-//  PsuhNot2
+//  ViewController.swift
+//  PushNavigation
 //
-//  Created by development on 8/29/16.
+//  Created by development on 8/31/16.
 //  Copyright © 2016 Tyro. All rights reserved.
 //
 
 import UIKit
 
-@UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
-    var window: UIWindow?
-
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        let tabBar = TabBar()
-        window?.rootViewController = tabBar
-        window?.makeKeyAndVisible()
-        TabBar.printChildren()
-        return true
-    }
-}
-
-
 class TabBar: UITabBarController, TabBarNavigable {
     
-    static let name = "t"
+    static let name = "_"
     static let children: [Node.Type] = [T1_R.self, T2_R.self]
     
     override func viewDidLoad() {
@@ -52,25 +35,6 @@ class TabBar: UITabBarController, TabBarNavigable {
     }
 }
 
-extension UINavigationController {
-    
-    var visibleNode: Node {
-        return (self.visibleViewController! as! Node)
-    }
-    
-    var visibleNodeType: Node.Type {
-        return Mirror(reflecting:self.viewControllers.last!).subjectType as! Node.Type
-    }
-    
-    func viewControllerForNodeName(nodeName: String) -> UIViewController? {
-        return self.viewControllers.filter { vc in
-            if let m = Mirror(reflecting: vc).subjectType as? Node.Type {
-                return m.name == nodeName
-            }
-            return false
-        }.first
-    }
-}
 
 class T1_R: UIViewController, Node {
     
@@ -92,12 +56,12 @@ class T1_R: UIViewController, Node {
                 let vc = T1_R_1()
                 self.navigationController?.pushViewController(vc, animated: animated)
                 vc.navigateTo(remainingPath)
-
+                
             case "t1_r_2":
                 let vc = T1_R_2()
                 self.navigationController?.pushViewController(vc, animated: animated)
                 vc.navigateTo(remainingPath)
-
+                
             default: break;
             }
         }
@@ -114,7 +78,7 @@ class T1_R_1: UIViewController, Node {
         self.view.backgroundColor = UIColor.whiteColor()
         addNavRequest()
     }
-
+    
     func navigateTo(path: [Node.Type]) {
         if let next = path.first where next.name != self.name() {
             let remainingPath = Array(path.dropFirst())
@@ -124,7 +88,7 @@ class T1_R_1: UIViewController, Node {
                 let vc = T1_R_1_1()
                 self.navigationController?.pushViewController(vc, animated: animated)
                 vc.navigateTo(remainingPath)
-
+                
             default: break;
             }
         }
@@ -141,7 +105,7 @@ class T1_R_1_1: UIViewController, Node {
         self.view.backgroundColor = UIColor.whiteColor()
         addNavRequest()
     }
-
+    
     func navigateTo(path: [Node.Type]) {
         
     }
@@ -157,7 +121,7 @@ class T1_R_2: UIViewController, Node {
         self.view.backgroundColor = UIColor.whiteColor()
         addNavRequest()
     }
-
+    
     func navigateTo(path: [Node.Type]) {
         if let next = path.first where next.name != self.name() {
             let remainingPath = Array(path.dropFirst())
@@ -171,7 +135,7 @@ class T1_R_2: UIViewController, Node {
             }
         }
     }
-
+    
 }
 
 class T1_R_2_1: UIViewController, Node {
@@ -184,7 +148,7 @@ class T1_R_2_1: UIViewController, Node {
         self.view.backgroundColor = UIColor.whiteColor()
         addNavRequest()
     }
-
+    
     func navigateTo(path: [Node.Type]) {
         
     }
@@ -216,12 +180,12 @@ class T2_R: UIViewController, Node  {
                 let vc = T2_R_2()
                 self.navigationController?.pushViewController(vc, animated: animated)
                 vc.navigateTo(remainingPath)
-
+                
             default: break;
             }
         }
     }
-
+    
 }
 
 class T2_R_1: UIViewController, Node  {
@@ -249,7 +213,7 @@ class T2_R_1: UIViewController, Node  {
             }
         }
     }
-
+    
     
 }
 
@@ -263,7 +227,7 @@ class T2_R_1_1: UIViewController, Node  {
         self.view.backgroundColor = UIColor.whiteColor()
         addNavRequest()
     }
-
+    
     
     func navigateTo(path: [Node.Type]) {
         
@@ -315,9 +279,4 @@ class T2_R_2_1: UIViewController, Node {
     }
     
 }
-
-
-
-
-
 
