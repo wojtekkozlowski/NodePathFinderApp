@@ -26,7 +26,7 @@ class TabBar: UITabBarController, TabBarNavigable {
     }
     
     @objc func remoteNotification(notification: NSNotification) {
-        let target = notification.userInfo!["target"]! as! String
+        let target = (notification.userInfo!["target"]! as! String).lowercaseString
         self.navigateToTarget(target)
     }
     
