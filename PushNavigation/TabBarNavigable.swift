@@ -31,7 +31,8 @@ extension TabBarNavigable {
                 self.selectedNavigationController.popToViewController(popTo, animated: nodePath.count == 0)
             }
             if nodePath.count > 0 {
-                self.selectedNavigationController.visibleNode.navigateTo(nodePath)
+                //self.selectedNavigationController.visibleNode.navigateTo(nodePath)
+                self.selectedNavigationController.navigate(self.selectedNavigationController.visibleNode as! UIViewController , path:nodePath)
             }
         }
     }
@@ -50,7 +51,8 @@ extension TabBarNavigable {
         }
         if newPath.count > 0 {
             let nodePath = newPath.map { $0.node }
-            self.selectedNavigationController.visibleNode.navigateTo(nodePath)
+            //self.selectedNavigationController.visibleNode.navigateTo(nodePath)
+            self.selectedNavigationController.navigate(self.selectedNavigationController.visibleNode as! UIViewController , path:nodePath)
         }
     }
     
@@ -102,14 +104,21 @@ extension UINavigationController {
     func navigate(vc: UIViewController, path: [Node.Type]){
         switch path.count {
         case 1:
+            if let node = vc as? Node {
+                let childVC = node.navigateTo(path.first!, animated: true)
+                //need to check (childVC as! Node).name == path.first!.name
+                let remainingPath = Array(path.dropFirst())
+                navigate(childVC!, path: remainingPath)
+            }
             self.pushViewController(vc, animated: true)
         case 0:
             break;
         default:
-            self.pushViewController(vc, animated: false)
             if let node = vc as? Node {
+                let childVC = node.navigateTo(path.first!, animated: false)
+                //need to check (childVC as! Node).name == path.first!.name
                 let remainingPath = Array(path.dropFirst())
-                node.navigateTo(remainingPath)
+                navigate(childVC!, path: remainingPath)
             }
         }
     }
