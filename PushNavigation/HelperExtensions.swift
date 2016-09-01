@@ -50,10 +50,54 @@ extension UIViewController {
         self.view.addSubview(t)
     }
     
+    func addModalButton() {
+        let color = UIColor(red:0.54, green:0.73, blue:0.42, alpha:1.0)
+        let md = UIButton(type: .System)
+        md.frame = CGRect(x: 80, y: 200, width: 100, height: 40)
+        md.layer.cornerRadius = 5
+        md.backgroundColor = color
+        md.setTitle("modal other", forState: .Normal)
+        md.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        md.action { sender in
+            let n = UINavigationController()
+            n.title = "modal nav"
+            let vc = UIViewController()
+            vc.title = "vc in modal"
+            vc.view.backgroundColor = color
+            vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(self.dismissController))
+            n.viewControllers = [vc]
+//            self.navigationController?.pushViewController(vc, animated: false)
+            self.presentViewController(n, animated: true, completion: nil)
+        }
+        self.view.addSubview(md)
+        let color2 = UIColor(red:0.42, green:0.61, blue:0.73, alpha:1.0)
+        let md2 = UIButton(type: .System)
+        md2.frame = CGRect(x: 220, y: 200, width: 100, height: 40)
+        md2.layer.cornerRadius = 5
+        md2.backgroundColor = color2
+        md2.setTitle("push other", forState: .Normal)
+        md2.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        md2.action { sender in
+            let vc = UIViewController()
+            vc.title = "vc in modal"
+            vc.view.backgroundColor = color2
+            vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(self.dismissController))
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        self.view.addSubview(md)
+        self.view.addSubview(md2)
+    }
+    
+    func dismissController(){
+        self.dismissViewControllerAnimated(false, completion: nil)
+    }
+
+    
     func buildView(){
         self.title = (self as? Node)?.name()
         self.view.backgroundColor = UIColor.whiteColor()
         addNavRequest()
+        addModalButton()
     }
 }
 

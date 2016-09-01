@@ -1,4 +1,4 @@
-//
+ //
 //  ViewController.swift
 //  PushNavigation
 //
@@ -26,9 +26,14 @@ class TabBar: UITabBarController, TabBarNavigable {
     }
     
     @objc func remoteNotification(notification: NSNotification) {
+        
         let target = (notification.userInfo!["target"]! as! String).lowercaseString
-        self.navigateToTarget(target)
+    
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+            self.navigateToTarget(target)
+        }
     }
+    
 }
 
 // ---------- TAB 1 ----------
