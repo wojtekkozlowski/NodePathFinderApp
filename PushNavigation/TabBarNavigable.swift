@@ -19,7 +19,9 @@ extension TabBarNavigable {
     
     func navigateToTarget(target: String){
         let visibleNodeType = self.selectedNavigationController.visibleNodeType
+        print(visibleNodeType)
         let path = NodePathFinder.pathBetweenNodes(destination: target, from: visibleNodeType, rootNode: TabBar.self)
+        print((self.selectedViewController as! UINavigationController).visibleViewController)
         
         if let first = path.first where first.action == .Up && first.node == TabBar.self {
             self.navToDifferentTab(target, tabItem: path.dropFirst().first!.node)
@@ -31,6 +33,7 @@ extension TabBarNavigable {
                 self.selectedNavigationController.popToViewController(popTo, animated: nodePath.count == 0)
             }
             if nodePath.count > 0 {
+                
                 self.selectedNavigationController.visibleNode.navigateTo(nodePath)
             }
         }
@@ -83,12 +86,29 @@ extension TabBarNavigable {
 extension UINavigationController {
     
     var visibleNode: Node {
-        return (self.visibleViewController! as! Node)
+        for c in self.viewControllers.reverse() {
+            if let visibleNode = c as? Node {
+                if c.presentedViewController != nil {
+                    c.dismissViewControllerAnimated(false, completion: nil)
+                }
+                return visibleNode
+            }
+        }
+        fatalError()
     }
     
     var visibleNodeType: Node.Type {
-        return Mirror(reflecting: self.visibleViewController!).subjectType as! Node.Type
+        for (index, vc) in self.viewControllers.reverse().enumerate() {
+            if let visibleNode = Mirror(reflecting: vc).subjectType as? Node.Type {
+                 return visibleNode
+            } else {
+                self.viewControllers.removeAtIndex(self.viewControllers.count - 1 - index)
+            }
+        }
+        
+        fatalError()
     }
+    
     
     func viewControllerForNodeName(nodeName: String) -> UIViewController? {
         return self.viewControllers.filter { vc in
