@@ -10,7 +10,7 @@ import UIKit
 
 class TabBar: UITabBarController, TabBarNavigable {
     
-    static let name = "_"
+    static let name = "<tabBar>"
     static let children: [Node.Type] = [T1_R.self, T2_R.self]
     
     override func viewDidLoad() {
