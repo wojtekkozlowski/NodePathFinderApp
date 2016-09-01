@@ -32,6 +32,8 @@ class PushNavigationUITests: XCTestCase {
     
     private var navTextField: XCUIElement!
     private var goButton: XCUIElement!
+    private var modalButton: XCUIElement!
+    private var pushOtherButton: XCUIElement!
     private var app: XCUIApplication!
     
         
@@ -43,6 +45,8 @@ class PushNavigationUITests: XCTestCase {
         
         navTextField = app.textFields["navTextField"]
         goButton = app.buttons["Go"]
+        modalButton = app.buttons["modal other"]
+        pushOtherButton = app.buttons["push other"]
     }
     
     func testNavigationSameTab() {
@@ -80,17 +84,29 @@ class PushNavigationUITests: XCTestCase {
     func testRandom() {
         let possibleDestinations = ["t1_r", "t1_r_1", "t1_r_1_1","t1_r_2", "t1_r_2_1",  "t2_r", "t2_r_1", "t2_r_1_1","t2_r_2", "t2_r_2_1"]
         
-        let destinations: [String] = (0...7600).map { _ in
+        let destinations: [String] = (0...1000).map { _ in
             let r = Int(arc4random_uniform(UInt32(possibleDestinations.count-1)))
             return possibleDestinations[r]
         }
-        for (i,d) in destinations.enumerate() {
+        
+        var last: String?
+        let noNeighborDupes:[String] = destinations.flatMap { item in
+            if item == last { return nil }
+            last = item
+            return item
+        }
+        
+        for (i,d) in noNeighborDupes.enumerate() {
             print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>(\(i)) going to: \(d)")
-            navigateToAndAssert(d)
+            navigateToAndAssert(d, pressModal: randomBool(), pressPushOther: randomBool())
         }
     }
     
-    private func navigateToAndAssert(destination: String) {
+    func randomBool() -> Bool {
+        return arc4random_uniform(2) == 0 ? true: false
+    }
+    
+    private func navigateToAndAssert(destination: String, pressModal: Bool = false, pressPushOther: Bool = false) {
         navTextField.clearAndEnterText(destination)
         
         let exists = NSPredicate(format: "exists == 1")
@@ -98,10 +114,15 @@ class PushNavigationUITests: XCTestCase {
         
         expectationForPredicate(exists, evaluatedWithObject: pred, handler: nil)
         goButton.tap()
+
+        if pressModal {
+            modalButton.tap()
+        } else if pressPushOther {
+            pushOtherButton.tap()
+        }
+        
         waitForExpectationsWithTimeout(5, handler: nil)
         
-        
-//        XCTAssert(app.navigationBars[destination].exists)
     }
     
 }

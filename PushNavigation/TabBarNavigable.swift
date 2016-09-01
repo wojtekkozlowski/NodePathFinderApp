@@ -19,7 +19,10 @@ extension TabBarNavigable {
     
     func navigateToTarget(target: String){
         let visibleNodeType = self.selectedNavigationController.visibleNodeType
-        print(visibleNodeType)
+        
+        //todo: fix
+        self.selectedNavigationController.visibleNode
+        
         let path = NodePathFinder.pathBetweenNodes(destination: target, from: visibleNodeType, rootNode: TabBar.self)
         print((self.selectedViewController as! UINavigationController).visibleViewController)
         
@@ -33,7 +36,6 @@ extension TabBarNavigable {
                 self.selectedNavigationController.popToViewController(popTo, animated: nodePath.count == 0)
             }
             if nodePath.count > 0 {
-                
                 self.selectedNavigationController.visibleNode.navigateTo(nodePath)
             }
         }
