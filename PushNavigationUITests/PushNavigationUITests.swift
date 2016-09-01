@@ -92,8 +92,16 @@ class PushNavigationUITests: XCTestCase {
     
     private func navigateToAndAssert(destination: String) {
         navTextField.clearAndEnterText(destination)
+        
+        let exists = NSPredicate(format: "exists == 1")
+        let pred = app.navigationBars[destination]
+        
+        expectationForPredicate(exists, evaluatedWithObject: pred, handler: nil)
         goButton.tap()
-        XCTAssert(app.navigationBars[destination].exists)
+        waitForExpectationsWithTimeout(5, handler: nil)
+        
+        
+//        XCTAssert(app.navigationBars[destination].exists)
     }
     
 }
