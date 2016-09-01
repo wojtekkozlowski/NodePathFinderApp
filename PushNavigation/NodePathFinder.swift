@@ -91,11 +91,18 @@ struct NodePathFinder {
 }
 
 extension Node {
+    
+    static var children: [Node.Type] {
+        return []
+    }
+    
     func name() -> String {
         return Self.name
     }
 
     func navigateTo(path:[Node.Type]) { }
+    
+    
 }
 
 extension Node {

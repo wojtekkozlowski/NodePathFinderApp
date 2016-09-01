@@ -29,12 +29,9 @@ class TabBar: UITabBarController, TabBarNavigable {
         let target = (notification.userInfo!["target"]! as! String).lowercaseString
         self.navigateToTarget(target)
     }
-    
-    func navigateTo(path: [Node.Type]) {
-        fatalError()
-    }
 }
 
+// ---------- TAB 1 ----------
 
 class T1_R: UIViewController, Node {
     
@@ -42,28 +39,19 @@ class T1_R: UIViewController, Node {
     static let name = "t1_r"
     
     override func viewDidLoad() {
-        self.title = self.name()
-        self.view.backgroundColor = UIColor.whiteColor()
-        addNavRequest()
+        self.buildView()
     }
     
     func navigateTo(path: [Node.Type]) {
-        if let next = path.first where next.name != self.name() {
-            let remainingPath = Array(path.dropFirst())
-            let animated = remainingPath.count == 0
-            switch next.name {
-            case "t1_r_1":
-                let vc = T1_R_1()
-                self.navigationController?.pushViewController(vc, animated: animated)
-                vc.navigateTo(remainingPath)
-                
-            case "t1_r_2":
-                let vc = T1_R_2()
-                self.navigationController?.pushViewController(vc, animated: animated)
-                vc.navigateTo(remainingPath)
-                
-            default: break;
-            }
+        switch path.first!.name {
+        case "t1_r_1":
+            let vc = T1_R_1()
+            self.navigationController!.navigate(vc, path: path)
+            
+        case "t1_r_2":
+            let vc = T1_R_2()
+            self.navigationController!.navigate(vc, path: path)
+        default: break;
         }
     }
 }
@@ -74,23 +62,15 @@ class T1_R_1: UIViewController, Node {
     static let children: [Node.Type] = [T1_R_1_1.self]
     
     override func viewDidLoad() {
-        self.title = self.name()
-        self.view.backgroundColor = UIColor.whiteColor()
-        addNavRequest()
+        self.buildView()
     }
     
     func navigateTo(path: [Node.Type]) {
-        if let next = path.first where next.name != self.name() {
-            let remainingPath = Array(path.dropFirst())
-            let animated = remainingPath.count == 0
-            switch next.name {
-            case "t1_r_1_1":
-                let vc = T1_R_1_1()
-                self.navigationController?.pushViewController(vc, animated: animated)
-                vc.navigateTo(remainingPath)
-                
-            default: break;
-            }
+        switch path.first!.name {
+        case "t1_r_1_1":
+            let vc = T1_R_1_1()
+            self.navigationController?.navigate(vc, path: path)
+        default: break;
         }
     }
 }
@@ -98,17 +78,11 @@ class T1_R_1: UIViewController, Node {
 class T1_R_1_1: UIViewController, Node {
     
     static let name = "t1_r_1_1"
-    static let children: [Node.Type] = []
     
     override func viewDidLoad() {
-        self.title = self.name()
-        self.view.backgroundColor = UIColor.whiteColor()
-        addNavRequest()
+        self.buildView()
     }
     
-    func navigateTo(path: [Node.Type]) {
-        
-    }
 }
 
 class T1_R_2: UIViewController, Node {
@@ -117,22 +91,15 @@ class T1_R_2: UIViewController, Node {
     static let children: [Node.Type] = [T1_R_2_1.self]
     
     override func viewDidLoad() {
-        self.title = self.name()
-        self.view.backgroundColor = UIColor.whiteColor()
-        addNavRequest()
+        self.buildView()
     }
     
     func navigateTo(path: [Node.Type]) {
-        if let next = path.first where next.name != self.name() {
-            let remainingPath = Array(path.dropFirst())
-            let animated = remainingPath.count == 0
-            switch next.name {
-            case "t1_r_2_1":
-                let vc = T1_R_2_1()
-                self.navigationController?.pushViewController(vc, animated: animated)
-                vc.navigateTo(remainingPath)
-            default: break;
-            }
+        switch path.first!.name {
+        case "t1_r_2_1":
+            let vc = T1_R_2_1()
+            self.navigationController!.navigate(vc, path: path)
+        default: break;
         }
     }
     
@@ -141,17 +108,12 @@ class T1_R_2: UIViewController, Node {
 class T1_R_2_1: UIViewController, Node {
     static let name = "t1_r_2_1"
     
-    static let children: [Node.Type] = []
-    
     override func viewDidLoad() {
         self.title = self.name()
         self.view.backgroundColor = UIColor.whiteColor()
         addNavRequest()
     }
     
-    func navigateTo(path: [Node.Type]) {
-        
-    }
 }
 
 // -- tab 2
@@ -162,27 +124,18 @@ class T2_R: UIViewController, Node  {
     static let children: [Node.Type] = [T2_R_1.self, T2_R_2.self]
     
     override func viewDidLoad() {
-        self.title = self.name()
-        self.view.backgroundColor = UIColor.whiteColor()
-        addNavRequest()
+        self.buildView()
     }
     
     func navigateTo(path: [Node.Type]) {
-        if let next = path.first where next.name != self.name() {
-            let remainingPath = Array(path.dropFirst())
-            let animated = remainingPath.count == 0
-            switch next.name {
-            case "t2_r_1":
-                let vc = T2_R_1()
-                self.navigationController?.pushViewController(vc, animated: animated)
-                vc.navigateTo(remainingPath)
-            case "t2_r_2":
-                let vc = T2_R_2()
-                self.navigationController?.pushViewController(vc, animated: animated)
-                vc.navigateTo(remainingPath)
-                
-            default: break;
-            }
+        switch path.first!.name {
+        case "t2_r_1":
+            let vc = T2_R_1()
+            self.navigationController!.navigate(vc, path: path)
+        case "t2_r_2":
+            let vc = T2_R_2()
+            self.navigationController!.navigate(vc, path: path)
+        default: break;
         }
     }
     
@@ -194,47 +147,28 @@ class T2_R_1: UIViewController, Node  {
     static let children: [Node.Type] = [T2_R_1_1.self]
     
     override func viewDidLoad() {
-        self.title = self.name()
-        self.view.backgroundColor = UIColor.whiteColor()
-        addNavRequest()
+        self.buildView()
     }
     
     func navigateTo(path: [Node.Type]) {
-        if let next = path.first where next.name != self.name() {
-            let remainingPath = Array(path.dropFirst())
-            let animated = remainingPath.count == 0
-            switch next.name {
-            case "t2_r_1_1":
-                let vc = T2_R_1_1()
-                self.navigationController?.pushViewController(vc, animated: animated)
-                vc.navigateTo(remainingPath)
-                
-            default: break;
-            }
+        switch path.first!.name {
+        case "t2_r_1_1":
+            let vc = T2_R_1_1()
+            self.navigationController!.navigate(vc, path: path)
+        default: break;
         }
+        
     }
-    
-    
 }
 
 class T2_R_1_1: UIViewController, Node  {
     
     static let name = "t2_r_1_1"
-    static let children: [Node.Type] = []
     
     override func viewDidLoad() {
-        self.title = self.name()
-        self.view.backgroundColor = UIColor.whiteColor()
-        addNavRequest()
+        self.buildView()
     }
-    
-    
-    func navigateTo(path: [Node.Type]) {
-        
-    }
-    
 }
-
 
 class T2_R_2: UIViewController, Node  {
     
@@ -242,41 +176,25 @@ class T2_R_2: UIViewController, Node  {
     static let children: [Node.Type] = [T2_R_2_1.self]
     
     override func viewDidLoad() {
-        self.title = self.name()
-        self.view.backgroundColor = UIColor.whiteColor()
-        addNavRequest()
+        self.buildView()
     }
     
     func navigateTo(path: [Node.Type]) {
-        if let next = path.first where next.name != self.name() {
-            let remainingPath = Array(path.dropFirst())
-            let animated = remainingPath.count == 0
-            switch next.name {
-            case "t2_r_2_1":
-                let vc = T2_R_2_1()
-                self.navigationController?.pushViewController(vc, animated: animated)
-                vc.navigateTo(remainingPath)
-            default: break;
-            }
+        switch path.first!.name {
+        case "t2_r_2_1":
+            let vc = T2_R_2_1()
+            self.navigationController!.navigate(vc, path: path)
+        default: break;
         }
     }
-    
 }
 
 class T2_R_2_1: UIViewController, Node {
     
     static let name = "t2_r_2_1"
-    static let children: [Node.Type] = []
     
     override func viewDidLoad() {
-        self.title = self.name()
-        self.view.backgroundColor = UIColor.whiteColor()
-        addNavRequest()
+        self.buildView()
     }
-    
-    func navigateTo(path: [Node.Type]) {
-        
-    }
-    
 }
 

@@ -98,6 +98,20 @@ extension UINavigationController {
             return false
             }.first
     }
+    
+    func navigate(vc: UIViewController, path: [Node.Type]){
+        switch path.count {
+        case 1:
+            self.pushViewController(vc, animated: true)
+        case 0: break;
+        default: self.pushViewController(vc, animated: false)
+        if let node = vc as? Node {
+                let remainingPath = Array(path.dropFirst())
+                node.navigateTo(remainingPath)
+            }
+            
+        }
+    }
 }
 
 

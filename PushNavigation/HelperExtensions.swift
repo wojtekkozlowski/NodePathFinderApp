@@ -12,20 +12,6 @@ import ObjectiveC
 
 var ActionBlockKey: UInt8 = 0
 
-
-extension UIViewController {
-    func centralButton(title title: String) -> UIButton {
-        let b = UIButton(type: .System)
-        b.backgroundColor = .blueColor()
-        b.frame = CGRect(x: 0, y: 0, width: 120, height: 40)
-        b.setTitle(title, forState: .Normal)
-        b.frame = CGRectOffset(b.frame, self.view.frame.size.width / 2 - b.frame.width / 2, self.view.frame.size.height / 2 - b.frame.height)
-        b.layer.cornerRadius = 5
-        b.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        return b
-    }
-}
-
 public extension UINavigationController {
     public func pushViewController(viewController: UIViewController, animated: Bool, completion: () -> Void) {
         CATransaction.begin()
@@ -36,6 +22,18 @@ public extension UINavigationController {
 }
 
 extension UIViewController {
+    
+    func centralButton(title title: String) -> UIButton {
+        let b = UIButton(type: .System)
+        b.backgroundColor = .blueColor()
+        b.frame = CGRect(x: 0, y: 0, width: 120, height: 40)
+        b.setTitle(title, forState: .Normal)
+        b.frame = CGRectOffset(b.frame, self.view.frame.size.width / 2 - b.frame.width / 2, self.view.frame.size.height / 2 - b.frame.height)
+        b.layer.cornerRadius = 5
+        b.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        return b
+    }
+    
     func addNavRequest(){
         let t = UITextField()
         t.accessibilityLabel = "navTextField"
@@ -50,6 +48,12 @@ extension UIViewController {
         
         self.view.addSubview(b)
         self.view.addSubview(t)
+    }
+    
+    func buildView(){
+        self.title = (self as? Node)?.name()
+        self.view.backgroundColor = UIColor.whiteColor()
+        addNavRequest()
     }
 }
 
