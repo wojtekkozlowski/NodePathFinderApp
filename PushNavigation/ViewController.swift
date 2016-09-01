@@ -121,9 +121,7 @@ class T1_R_2_1: UIViewController, Node {
     static let name = "t1_r_2_1"
     
     override func viewDidLoad() {
-        self.title = self.name()
-        self.view.backgroundColor = UIColor.whiteColor()
-        addNavRequest()
+        self.buildView()
     }
     
 }
