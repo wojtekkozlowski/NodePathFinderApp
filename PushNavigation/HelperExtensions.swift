@@ -79,7 +79,7 @@ extension UIViewController {
         md2.setTitleColor(UIColor.whiteColor(), forState: .Normal)
         md2.action { sender in
             let vc = UIViewController()
-            vc.title = "vc in modal"
+            vc.title = "pushed other"
             vc.view.backgroundColor = color2
             vc.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(self.dismissController))
             self.navigationController?.pushViewController(vc, animated: true)

@@ -29,7 +29,7 @@ class TabBar: UITabBarController, TabBarNavigable {
         
         let target = (notification.userInfo!["target"]! as! String).lowercaseString
     
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(2 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(1.5 * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
             self.navigateToTarget(target)
         }
     }
