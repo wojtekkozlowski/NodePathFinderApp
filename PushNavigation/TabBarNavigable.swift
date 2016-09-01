@@ -87,7 +87,7 @@ extension UINavigationController {
     }
     
     var visibleNodeType: Node.Type {
-        return Mirror(reflecting:self.viewControllers.last!).subjectType as! Node.Type
+        return Mirror(reflecting: self.visibleViewController!).subjectType as! Node.Type
     }
     
     func viewControllerForNodeName(nodeName: String) -> UIViewController? {
@@ -103,13 +103,14 @@ extension UINavigationController {
         switch path.count {
         case 1:
             self.pushViewController(vc, animated: true)
-        case 0: break;
-        default: self.pushViewController(vc, animated: false)
-        if let node = vc as? Node {
+        case 0:
+            break;
+        default:
+            self.pushViewController(vc, animated: false)
+            if let node = vc as? Node {
                 let remainingPath = Array(path.dropFirst())
                 node.navigateTo(remainingPath)
             }
-            
         }
     }
 }
