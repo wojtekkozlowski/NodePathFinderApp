@@ -51,11 +51,11 @@ class PushNavigationUITests: XCTestCase {
     
     func testNavigationSameTab() {
         navigateToAndAssert("t1_r_1_1")
-        navigateToAndAssert("t1_r_2_1")
-        navigateToAndAssert("t1_r_1")
-        navigateToAndAssert("t1_r_2")
-        navigateToAndAssert("t1_r")
-        navigateToAndAssert("t1_r_2")
+        navigateToAndAssert("t1_r_2_1", pressModal: true)
+        navigateToAndAssert("t1_r_1", pressPushOther: true)
+        navigateToAndAssert("t1_r_2", pressModal: true)
+        navigateToAndAssert("t1_r", pressModal: true)
+        navigateToAndAssert("t1_r_2", pressPushOther: true)
         navigateToAndAssert("t1_r")
     }
     
