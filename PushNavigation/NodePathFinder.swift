@@ -35,7 +35,7 @@ struct NodePathFinder {
                     return []
                 }
                 let pathToCurrentFromRoot = pathToNode(destination: currentNode.name, from: rootNode)
-                return buildPath(pathToCurrentFromRoot, arrB: pathToDestinationFromRoot)
+                return buildPath(a: pathToCurrentFromRoot, b: pathToDestinationFromRoot)
             } else {
                 return pathToA.map { ActionItem(action: .Down, node: $0) }
             }
@@ -77,8 +77,8 @@ struct NodePathFinder {
         
         return (newA, newB)}
     
-    private static func buildPath(arrA:[Node.Type], arrB: [Node.Type]) -> [ActionItem] {
-        let (newA, newB) = dropCommonItemsBarLast(a: arrA, b: arrB)
+    private static func buildPath(a a:[Node.Type], b: [Node.Type]) -> [ActionItem] {
+        let (newA, newB) = dropCommonItemsBarLast(a: a, b: b)
         let resA = newA.first.map({ ActionItem(action: .Up, node: $0) })
         let resB = newB.dropFirst().map { ActionItem(action: .Down, node: $0) }
         
