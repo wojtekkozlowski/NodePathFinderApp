@@ -47,16 +47,19 @@ class T1_R: UIViewController, Node {
         self.buildView()
     }
     
-    func navigateTo(path: [Node.Type]) {
-        switch path.first!.name {
+    func navigateTo(node: Node.Type, animated: Bool) -> UIViewController? {
+        switch node.name {
         case "t1_r_1":
             let vc = T1_R_1()
-            self.navigationController!.navigate(vc, path: path)
+            self.navigationController!.pushViewController(vc, animated: animated)
+            return vc
             
         case "t1_r_2":
             let vc = T1_R_2()
-            self.navigationController!.navigate(vc, path: path)
-        default: break;
+            self.navigationController!.pushViewController(vc, animated: animated)
+            return vc
+        default:
+            return nil
         }
     }
 }
@@ -70,12 +73,14 @@ class T1_R_1: UIViewController, Node {
         self.buildView()
     }
     
-    func navigateTo(path: [Node.Type]) {
-        switch path.first!.name {
+    func navigateTo(node: Node.Type, animated: Bool) -> UIViewController? {
+        switch node.name {
         case "t1_r_1_1":
             let vc = T1_R_1_1()
-            self.navigationController?.navigate(vc, path: path)
-        default: break;
+            self.navigationController!.pushViewController(vc, animated: animated)
+            return vc
+        default:
+            return nil
         }
     }
 }
@@ -99,12 +104,14 @@ class T1_R_2: UIViewController, Node {
         self.buildView()
     }
     
-    func navigateTo(path: [Node.Type]) {
-        switch path.first!.name {
+    func navigateTo(node: Node.Type, animated: Bool) -> UIViewController? {
+        switch node.name {
         case "t1_r_2_1":
             let vc = T1_R_2_1()
-            self.navigationController!.navigate(vc, path: path)
-        default: break;
+            self.navigationController!.pushViewController(vc, animated: animated)
+            return vc
+        default:
+            return nil
         }
     }
     
@@ -130,15 +137,18 @@ class T2_R: UIViewController, Node  {
         self.buildView()
     }
     
-    func navigateTo(path: [Node.Type]) {
-        switch path.first!.name {
+    func navigateTo(node: Node.Type, animated: Bool) -> UIViewController? {
+        switch node.name {
         case "t2_r_1":
             let vc = T2_R_1()
-            self.navigationController!.navigate(vc, path: path)
+            self.navigationController!.pushViewController(vc, animated: animated)
+            return vc
         case "t2_r_2":
             let vc = T2_R_2()
-            self.navigationController!.navigate(vc, path: path)
-        default: break;
+            self.navigationController!.pushViewController(vc, animated: animated)
+            return vc
+        default:
+            return nil
         }
     }
     
@@ -153,12 +163,14 @@ class T2_R_1: UIViewController, Node  {
         self.buildView()
     }
     
-    func navigateTo(path: [Node.Type]) {
-        switch path.first!.name {
+    func navigateTo(node: Node.Type, animated: Bool) -> UIViewController? {
+        switch node.name {
         case "t2_r_1_1":
             let vc = T2_R_1_1()
-            self.navigationController!.navigate(vc, path: path)
-        default: break;
+            self.navigationController!.pushViewController(vc, animated: animated)
+            return vc
+        default:
+            return nil
         }
         
     }
@@ -182,12 +194,14 @@ class T2_R_2: UIViewController, Node  {
         self.buildView()
     }
     
-    func navigateTo(path: [Node.Type]) {
-        switch path.first!.name {
+    func navigateTo(node: Node.Type, animated: Bool) -> UIViewController? {
+        switch node.name {
         case "t2_r_2_1":
             let vc = T2_R_2_1()
-            self.navigationController!.navigate(vc, path: path)
-        default: break;
+            self.navigationController!.pushViewController(vc, animated: animated)
+            return vc
+        default:
+            return nil
         }
     }
 }
