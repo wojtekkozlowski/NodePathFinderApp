@@ -121,8 +121,7 @@ extension UINavigationController {
     
     func navigate(vc: Node, path: [Node.Type]) {
         if let first = path.first {
-            let nextVC = vc.navigateTo(first.name, animated: false)
-            if let nextNode = nextVC as? Node {
+            if let nextNode = vc.navigateTo(first.name, animated: path.count == 1) {
                 navigate(nextNode, path: Array(path.dropFirst()))
             }
         }
