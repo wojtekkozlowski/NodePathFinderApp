@@ -24,7 +24,6 @@ extension TabBarNavigable {
         self.selectedNavigationController.visibleNode
         
         let path = NodePathFinder.pathBetweenNodes(destination: target, from: visibleNodeType, rootNode: TabBar.self)
-        print((self.selectedViewController as! UINavigationController).visibleViewController)
         
         if let first = path.first where first.action == .Up && first.node == TabBar.self {
             self.navToDifferentTab(target, tabItem: path.dropFirst().first!.node)
@@ -111,7 +110,6 @@ extension UINavigationController {
         fatalError()
     }
     
-    
     func viewControllerForNodeName(nodeName: String) -> UIViewController? {
         return self.viewControllers.filter { vc in
             if let m = Mirror(reflecting: vc).subjectType as? Node.Type {
@@ -122,11 +120,10 @@ extension UINavigationController {
     }
     
     func navigate(vc: Node, path: [Node.Type]) {
-        let nextVC = vc.navigateTo(path.first!, animated: false)
-        if let nextNode = nextVC as? Node {
-            let remainingPath = Array(path.dropFirst())
-            if remainingPath.count > 0 {
-                navigate(nextNode, path: remainingPath)
+        if let first = path.first {
+            let nextVC = vc.navigateTo(first.name, animated: false)
+            if let nextNode = nextVC as? Node {
+                navigate(nextNode, path: Array(path.dropFirst()))
             }
         }
     }

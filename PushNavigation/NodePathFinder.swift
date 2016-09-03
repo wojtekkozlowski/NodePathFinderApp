@@ -21,7 +21,7 @@ struct ActionItem {
 protocol Node {
     static var name: String {get}
     static var children: [Node.Type] {get}
-    func navigateTo(node: Node.Type, animated: Bool) -> UIViewController?
+    func navigateTo(next: String, animated: Bool) -> UIViewController?
 }
 
 struct NodePathFinder {
@@ -101,7 +101,7 @@ extension Node {
         return Self.name
     }
 
-    func navigateTo(node: Node.Type, animated: Bool) -> UIViewController? {
+    func navigateTo(next: String, animated: Bool) -> UIViewController? {
         return nil
     }
     
