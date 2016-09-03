@@ -97,14 +97,13 @@ extension Node {
         return []
     }
     
-    func name() -> String {
+    var name: String  {
         return Self.name
     }
 
     func navigateTo(node: Node.Type, animated: Bool) -> UIViewController? {
         return nil
     }
-    
     
 }
 

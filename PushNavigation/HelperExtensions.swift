@@ -94,7 +94,7 @@ extension UIViewController {
 
     
     func buildView(){
-        self.title = (self as? Node)?.name()
+        self.title = (self as? Node)?.name
         self.view.backgroundColor = UIColor.whiteColor()
         addNavRequest()
         addModalButton()

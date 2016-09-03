@@ -36,7 +36,7 @@ extension TabBarNavigable {
                 self.selectedNavigationController.popToViewController(popTo, animated: nodePath.count == 0)
             }
             if nodePath.count > 0 {
-                self.selectedNavigationController.navigate(self.selectedNavigationController.visibleNode as! UIViewController , path:nodePath)
+                self.selectedNavigationController.navigate(self.selectedNavigationController.visibleNode, path:nodePath)
             }
         }
     }
@@ -55,7 +55,7 @@ extension TabBarNavigable {
         }
         if newPath.count > 0 {
             let nodePath = newPath.map { $0.node }
-            self.selectedNavigationController.navigate(self.selectedNavigationController.visibleNode as! UIViewController , path:nodePath)
+            self.selectedNavigationController.navigate(self.selectedNavigationController.visibleNode, path:nodePath)
         }
     }
     
@@ -102,7 +102,7 @@ extension UINavigationController {
     var visibleNodeType: Node.Type {
         for (index, vc) in self.viewControllers.reverse().enumerate() {
             if let visibleNode = Mirror(reflecting: vc).subjectType as? Node.Type {
-                 return visibleNode
+                return visibleNode
             } else {
                 self.viewControllers.removeAtIndex(self.viewControllers.count - 1 - index)
             }
@@ -121,19 +121,12 @@ extension UINavigationController {
             }.first
     }
     
-    func navigate(vc: UIViewController, path: [Node.Type]) {
-        if path.count <= 1 {
-            if let node = vc as? Node {
-                node.navigateTo(path.first!, animated: true)
-            }
-        }
-        else {
-            if let node = vc as? Node {
-                let childVC = node.navigateTo(path.first!, animated: false)
-                let remainingPath = Array(path.dropFirst())
-                if (childVC as! Node).name() == path.first?.name {
-                    navigate(childVC!, path: remainingPath)
-                }
+    func navigate(vc: Node, path: [Node.Type]) {
+        let nextVC = vc.navigateTo(path.first!, animated: false)
+        if let nextNode = nextVC as? Node {
+            let remainingPath = Array(path.dropFirst())
+            if remainingPath.count > 0 {
+                navigate(nextNode, path: remainingPath)
             }
         }
     }
